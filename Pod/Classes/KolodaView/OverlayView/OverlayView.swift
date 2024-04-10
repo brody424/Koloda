@@ -15,5 +15,9 @@ open class OverlayView: UIView {
     open func update(progress: CGFloat) {
         alpha = progress
     }
+    
+    open func refresh() {
+        
+    }
 
 }
