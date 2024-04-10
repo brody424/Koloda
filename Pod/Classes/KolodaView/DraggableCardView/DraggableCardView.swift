@@ -418,7 +418,7 @@ public class DraggableCardView: UIView, UIGestureRecognizerDelegate {
         overlayAlphaAnimation?.duration = cardResetAnimationDuration
         overlayAlphaAnimation?.completionBlock = { _, _ in
             self.overlayView?.alpha = 0
-            self?.overlayView?.refresh()
+            self.overlayView?.refresh()
         }
         overlayView?.pop_add(overlayAlphaAnimation, forKey: "resetOverlayAnimation")
         
