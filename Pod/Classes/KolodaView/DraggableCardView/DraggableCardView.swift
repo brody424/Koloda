@@ -44,7 +44,7 @@ private let cardResetAnimationSpringSpeed: CGFloat = 20.0
 private let cardResetAnimationKey = "resetPositionAnimation"
 private let cardResetAnimationDuration: TimeInterval = 0.2
 internal var cardSwipeActionAnimationDuration: TimeInterval = DragSpeed.default.rawValue
-
+internal var cardSwipeDetectMultiple = 1.5 // 
 public class DraggableCardView: UIView, UIGestureRecognizerDelegate {
 
     //Drag animation constants
@@ -324,10 +324,13 @@ public class DraggableCardView: UIView, UIGestureRecognizerDelegate {
             
             // check 4 borders for intersection with line between touchpoint and center of card
             // return smallest percentage of distance to edge point or 0
-            return rect.perimeterLines
+            let percent = (rect.perimeterLines
                 .compactMap { CGPoint.intersectionBetweenLines(targetLine, line2: $0) }
                 .map { centerDistance / $0.distanceTo(.zero) }
-                .min() ?? 0
+                .min() ?? 0) * cardSwipeDetectMultiple
+            
+            return percent > 1.0 ? 1.0 : percent
+                
         }
     }
     
